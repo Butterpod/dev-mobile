@@ -29,25 +29,31 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "TodoList",
-  data() {
-    return {
-      todos: [
-        {
-          id: 1,
-          name : 'tache 1',
-          completed : false
-        },
-        {
-          id: 2,
-          name : 'tache 2',
-          completed: true
-        }
-      ]
-      ,
-      newTodo: '',
-      filter: 'all',
+  computed : {
+    ...mapGetters('todolist', ['getTodo']),
+    ...mapGetters('todolist', ['getFilter']),
+    ...mapGetters('todolist', ['getNewTodo']),
+
+    todos(){
+      return this.getTodo;
+    },
+    filter(){
+      return this.getFilter;
+    },
+    newTodo(){
+      return this.getNewTodo;
+    },
+
+    filterTodos () {
+      if (this.filter === 'todo') {
+        return this.todos.filter(todo => !todo.completed)
+      } else if (this.filter === 'finished') {
+        return this.todos.filter(todo => todo.completed)
+      }
+      return this.todos
     }
   },
   methods : {
@@ -65,17 +71,8 @@ export default {
       });
       this.newTodo = '';
     },
-  },
-  computed : {
-    filterTodos () {
-      if (this.filter === 'todo') {
-        return this.todos.filter(todo => !todo.completed)
-      } else if (this.filter === 'finished') {
-        return this.todos.filter(todo => todo.completed)
-      }
-      return this.todos
-    }
   }
+
 }
 </script>
 
