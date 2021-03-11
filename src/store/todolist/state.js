@@ -10,6 +10,11 @@ export default function () {
                 id: 2,
                 name : 'tache 2',
                 completed: true
+            },
+            {
+                id: 3,
+                name: 'tache 3',
+                completed: false
             }
         ]
         ,

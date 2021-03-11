@@ -3,7 +3,7 @@
   <div class="ajouter">
     <h2> Ajouter une Todo </h2>
     <input type="text" v-model="newTodo" placeholder="Nouveau todo" v-on:keyup.enter="addTodo" />
-    <button v-on:click.prevent="addTodo"> Ajouter </button>
+    <button v-on:click.prevent="adddTodo"> Ajouter </button>
   </div>
 
   <div class="todolist">
@@ -12,7 +12,7 @@
       <li v-for="todo in filterTodos" :key="todo.id" >
           <label id="nameTodo"> {{ todo.name }} </label>
           <input type="checkbox" id="checkBox" v-model="todo.completed"/>
-          <button @click.prevent="removeTodo(todo)" > Delete </button>
+          <button @click.prevent="removTodo(todo)" > Delete </button>
       </li>
     </ul>
   </div>
@@ -29,14 +29,12 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "TodoList",
   computed : {
-    ...mapGetters('todolist', ['getTodo']),
-    ...mapGetters('todolist', ['getFilter']),
-    ...mapGetters('todolist', ['getNewTodo']),
-
+    ...mapGetters('todolist', ['getTodo', 'getFilter', 'getNewTodo']),
+    ...mapActions('todolist', ['test', 'addTodo','removeTodo']),
     todos(){
       return this.getTodo;
     },
@@ -46,7 +44,9 @@ export default {
     newTodo(){
       return this.getNewTodo;
     },
-
+    test(){
+      return this.test;
+    },
     filterTodos () {
       if (this.filter === 'todo') {
         return this.todos.filter(todo => !todo.completed)
@@ -57,19 +57,11 @@ export default {
     }
   },
   methods : {
-    removeTodo(todo) {
-      let todoIndex = this.todos.indexOf(todo);
-      // this.todos = this.todos.slice(todoIndex);
-      // splice est mieux.
-      this.todos.splice(todoIndex, 1);
+    removTodo(todo) {
+      return this.removeTodo(todo);
     },
-    addTodo() {
-      this.todos.push({
-        id : this.todos.length + 1,
-        name : this.newTodo,
-        completed : false,
-      });
-      this.newTodo = '';
+    adddTodo() {
+      return this.addTodo();
     },
   }
 
