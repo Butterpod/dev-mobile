@@ -29,13 +29,12 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "TodoList",
   methods : {
     ...mapMutations("todolist", ['removeTodo', 'addTodo', 'setFilter', 'setNewTodo']),
-    ...mapActions("todolist", ['actionAddTodo']),
   },
   computed: {
     ...mapGetters("todolist", ['getFilteredTodos', 'getTodos', 'getNewTodo', 'getFilter']),
