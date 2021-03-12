@@ -1,11 +1,20 @@
-export function getTodo(state) {
+export const getFilteredTodos = (state) => {
+    if (state.filter === 'todo') {
+        return state.todos.filter(todo => !todo.completed);
+    } else if (state.filter === 'finished') {
+        return state.todos.filter(todo => todo.completed);
+    }
     return state.todos;
 }
 
-export function getFilter(state) {
-    return state.filter;
+export const getTodos = (state) => {
+    return state.todos;
 }
 
-export function getNewTodo(state){
+export const getNewTodo = (state) => {
     return state.newTodo;
+}
+
+export const getFilter = (state) => {
+    return state.filter;
 }

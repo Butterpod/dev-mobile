@@ -1,4 +1,4 @@
-  <template>
+<template>
   <todo-list></todo-list>
 </template>
 
@@ -12,5 +12,8 @@ export default {
   }
 }
 </script>
+
+<style>
+</style>
 
 
