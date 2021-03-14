@@ -1,12 +1,18 @@
 <template>
   <div class="login">
-    <h1> Page de connexion </h1>
+    <h1> Page de compte </h1>
+    <account></account>
   </div>
 </template>
 
 <script>
+import Account from "@/components/Account";
+
 export default {
-  name: "Login"
+  name: "Login",
+  components : {
+    Account
+  }
 }
 </script>
 
