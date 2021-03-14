@@ -1,24 +1,20 @@
 export default function () {
     return {
-        todos: [
+        todoLists: [
             {
-                id: 1,
-                name : 'tache 1',
-                completed : false
-            },
-            {
-                id: 2,
-                name : 'tache 2',
-                completed: true
-            },
-            {
-                id: 3,
-                name: 'tache 3',
-                completed: false
+                id : 1,
+                name : 'liste 1',
+                newTodo : '',
+                filtre : 'all',
+                display : false,
+                todos : [
+                    {
+                        id : 1,
+                        name : 'tache 1',
+                        completed : false,
+                    },
+                ],
             }
-        ]
-        ,
-        newTodo: '',
-        filter: 'all',
+        ],
     }
 }

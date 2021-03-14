@@ -1,21 +1,45 @@
-export function removeTodo(state, todo) {
-    let todoIndex = state.todos.indexOf(todo);
-    state.todos.splice(todoIndex, 1);
+export function addTodoList(state) {
+    state.todoLists.push({
+        id: state.todoLists.length + 1,
+        name : 'liste' + (state.todoLists.length + 1),
+        newTodo : '',
+        filtre : '',
+        display : false,
+        todos : [],
+    })
+    console.log(state.todoLists);
 }
 
-export function addTodo(state) {
-    state.todos.push({
-        id: state.todos.length + 1,
-        name: state.newTodo,
-        completed: false,
+export function setFilter(state, payload) {
+    state.todoLists.find(el => el.id === payload.id).filtre = payload.filtre;
+}
+
+export function removeTodo(state, payload) {
+    let todoL = state.todoLists.find(el => el.id === payload.todoList.id);
+    let t = todoL.todos;
+    let todoIndex = t.indexOf(payload.todo);
+    t.splice(todoIndex, 1);
+}
+
+export function addTodo(state, todoList) {
+    todoList.todos.push({
+        id : todoList.todos.length + 1,
+        name : todoList.newTodo,
+        completed : false,
     });
-    state.newTodo = '';
+    todoList.newTodo = '';
 }
 
-export function setFilter(state, filtre) {
-    state.filter = filtre;
+export function verifyDisplay(state) {
+    //console.log(state.todoLists.find(el => el.display === true));
+    let todoL = state.todoLists.find(el => el.display === true);
+    if (todoL !== undefined) {
+        todoL.display = false;
+    }
+
 }
 
-export function setNewTodo(state, e) {
-    state.newTodo = e.target.value;
+export function display(state, id) {
+    let todoL = state.todoLists.find(el => el.id === id);
+    todoL.display = true;
 }
