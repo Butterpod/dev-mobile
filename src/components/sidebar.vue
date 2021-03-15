@@ -1,21 +1,35 @@
 <template>
 
   <h1> Listes </h1>
-  <sidebar-item></sidebar-item>
-  <button v-on:click="addTodoList"> Add todoList </button>
+  <sidebar-item :todoLists="getData"></sidebar-item>
+  <input type="text" v-model="listName" placeholder="Ajouter une todolist" v-on:keyup.enter="createTodoList(listName)"/>
+  <button v-on:click="createTodoList(listName)"> Ajouter todolist </button>
 </template>
 
 <script>
-import {mapMutations} from "vuex";
 import sidebarItem from "@/components/sidebarItem";
+import {mapActions} from "vuex";
 
 export default {
 name: "sidebar",
+  data() {
+    return {
+    listName: '',
+  }
+  },
   components : {
     sidebarItem
   },
-  methods: {
-    ...mapMutations("todolist", ['addTodoList']),
+  props: {
+    todoLists: {type: Array}
+  },
+  methods : {
+    ...mapActions("todolist", ['createTodoList']),
+  },
+  computed : {
+    getData() {
+      return this.todoLists;
+    }
   }
 }
 </script>

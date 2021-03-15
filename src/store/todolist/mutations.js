@@ -1,45 +1,55 @@
-export function addTodoList(state) {
-    state.todoLists.push({
-        id: state.todoLists.length + 1,
-        name : 'liste' + (state.todoLists.length + 1),
-        newTodo : '',
-        filtre : '',
-        display : false,
-        todos : [],
-    })
-    console.log(state.todoLists);
+export function load(state, data) {
+    state.todoLists = data;
 }
 
-export function setFilter(state, payload) {
-    state.todoLists.find(el => el.id === payload.id).filtre = payload.filtre;
+export function addTodoList(state, data) {
+    state.todoLists.push(data);
 }
 
-export function removeTodo(state, payload) {
-    let todoL = state.todoLists.find(el => el.id === payload.todoList.id);
-    let t = todoL.todos;
-    let todoIndex = t.indexOf(payload.todo);
-    t.splice(todoIndex, 1);
+export function setCurrentTodos(state, todo) {
+    state.currentTodos = todo;
+    console.log(state.currentTodos);
 }
 
-export function addTodo(state, todoList) {
-    todoList.todos.push({
-        id : todoList.todos.length + 1,
-        name : todoList.newTodo,
-        completed : false,
-    });
-    todoList.newTodo = '';
+export function setCurrentListId(state, id) {
+    state.currentListId = id;
 }
 
-export function verifyDisplay(state) {
-    //console.log(state.todoLists.find(el => el.display === true));
-    let todoL = state.todoLists.find(el => el.display === true);
-    if (todoL !== undefined) {
-        todoL.display = false;
-    }
+export function complete(state, data) {
+    console.log(state);
+    console.log(data);
+    /*
+    let stateListe = state.todoLists.find(el => el.id === data.todolist_id);
+    console.log(stateListe);
+    let stateTodo = stateListe.todos.find(el => el.id === data.id);
+    stateTodo.completed = data.completed;
+
+    state.currentTodos.find(el => el.id === data.id).completed = data.completed;
+
+     */
 
 }
 
-export function display(state, id) {
-    let todoL = state.todoLists.find(el => el.id === id);
-    todoL.display = true;
+export function addTodo(state, data) {
+    console.log(data);
+    state.currentTodos.push({
+        id : data.id,
+        todolist_id : data.todolist_id,
+        name: data.name,
+        completed: data.completed,
+        created_at: data.created_at,
+        updated_at: data.updated_at
+        });
+    console.log(state.currentTodos);
+}
+
+export function modify(state, data) {
+    let todo = state.currentTodos.find(el => el.id === data.id)
+    todo.name = data.name;
+}
+
+export function resetState(state) {
+    state.todoLists = null;
+    state.currentTodos = null;
+    state.currentListId = null;
 }

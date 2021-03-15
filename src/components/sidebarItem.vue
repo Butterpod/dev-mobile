@@ -1,21 +1,21 @@
 <template>
   <ul>
-  <li v-for="todo in getTodoLists" :key="todo.id">
-    <label id="nameTodo" v-on:click="displayer(todo.id)"> {{ todo.name + " (" + todo.id + ")" }} </label>
+  <li v-for="todo in todoLists" :key="todo.id" v-on:click="getTodo(todo.id)">
+    <label id="nameTodo"> {{ todo.name }} </label>
   </li>
   </ul>
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+
+import {mapActions} from "vuex";
+
 export default {
   name: "sidebarItem",
-    methods : {
-      ...mapActions("todolist", ['displayer']),
-    },
-    computed : {
-      ...mapGetters("todolist", ['getTodoLists']),
-    },
+  props : ['todoLists'],
+  methods : {
+    ...mapActions("todolist", ['getTodo']),
+  }
 }
 </script>
 

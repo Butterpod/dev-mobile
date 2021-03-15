@@ -6,8 +6,9 @@
       <li> <a href="#" v-on:click="setWindow('register')"> Inscription </a> </li>
     </ul>
 
-    <p> Etat de connexion : <strong> {{ isConnected }} </strong> </p>
   </nav>
+
+  <p> Etat de connexion : <strong> {{ isConnected }} </strong> </p>
 
   <div class="content">
   <div v-if="getWindow === 'login' && isConnected !== true">
@@ -46,7 +47,7 @@
 
   <div v-if="isConnected === true">
 
-    <form @submit="logout">
+    <form @submit.prevent="logout">
       <button> Deconnexion </button>
     </form>
   </div>
@@ -67,8 +68,8 @@ export default {
   }
   },
   methods : {
-    ...mapMutations("account", ["setWindow"]),
-    ...mapActions("account", ["login", "register", "logout"]),
+    ...mapMutations("account", ["setWindow", "logout"]),
+    ...mapActions("account", ["login", "register"]),
   },
   computed : {
     ...mapGetters("account", ["getWindow", "isConnected"]),
