@@ -7,17 +7,23 @@
   <div class="affichage">
     <h2> Todos </h2>
     <ul>
-      <li v-for="todo in todos" :key="todo.id">
-        <label id="nameTodo" @dblclick="editTodo(todo)"> {{ todo.name }} </label>
+      <li v-for="todo in getFilteredCurrentTodos" :key="todo.id">
+        <label id="nameTodo"> {{ todo.name }} </label>
         <input type="checkbox" id="checkBox" v-model="todo.completed" true-value="1" false-value="0" @change="completeTodo([todo.id, todo.name, todo.completed, todo.todolist_id])"/>
 
       </li>
     </ul>
   </div>
+
+  <div class="filtre">
+    <button v-bind:class="{selected: getFiltre}" v-on:click.prevent="setFiltre('all')"> Tout</button>
+    <button v-bind:class="{selected: getFiltre}" v-on:click.prevent="setFiltre('todo')"> Todo </button>
+    <button v-bind:class="{selected: getFiltre}" v-on:click.prevent="setFiltre('finished')"> Terminé </button>
+  </div>
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapMutations} from "vuex";
 
 export default {
 name: "TodoList",
@@ -29,9 +35,10 @@ name: "TodoList",
   props: ['todos'],
   methods : {
     ...mapActions("todolist", ['completeTodo', 'createTodo', 'modifyTodo']),
+    ...mapMutations("todolist", ["setFiltre"]),
   },
   computed : {
-    ...mapGetters("todolist", ['getCurrentListId']),
+    ...mapGetters("todolist", ['getCurrentListId', 'getFilteredCurrentTodos', 'getFiltre']),
   }
 }
 </script>

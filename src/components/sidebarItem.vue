@@ -1,7 +1,8 @@
 <template>
   <ul>
-  <li v-for="todo in todoLists" :key="todo.id" v-on:click="getTodo(todo.id)">
-    <label id="nameTodo"> {{ todo.name }} </label>
+  <li v-for="todo in todoLists" :key="todo.id">
+    <label id="nameTodo" v-on:click="getTodo(todo.id)"> {{ todo.name }} </label>
+    <button v-on:click="deleteTodoList(todo.id)"> Delete </button>
   </li>
   </ul>
 </template>
@@ -14,7 +15,7 @@ export default {
   name: "sidebarItem",
   props : ['todoLists'],
   methods : {
-    ...mapActions("todolist", ['getTodo']),
+    ...mapActions("todolist", ['getTodo', 'deleteTodoList']),
   }
 }
 </script>

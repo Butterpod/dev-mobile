@@ -16,18 +16,9 @@ export function setCurrentListId(state, id) {
 }
 
 export function complete(state, data) {
-    console.log(state);
-    console.log(data);
-    /*
-    let stateListe = state.todoLists.find(el => el.id === data.todolist_id);
-    console.log(stateListe);
-    let stateTodo = stateListe.todos.find(el => el.id === data.id);
-    stateTodo.completed = data.completed;
-
+    console.log(state.currentTodos.find(el => el.id === data.id).completed);
+    console.log(data.completed);
     state.currentTodos.find(el => el.id === data.id).completed = data.completed;
-
-     */
-
 }
 
 export function addTodo(state, data) {
@@ -52,4 +43,13 @@ export function resetState(state) {
     state.todoLists = null;
     state.currentTodos = null;
     state.currentListId = null;
+}
+
+export function setFiltre(state, filtre) {
+    state.filtre = filtre;
+}
+
+export function deleteList(state, data) {
+    console.log(data);
+    console.log(state.todoLists);
 }

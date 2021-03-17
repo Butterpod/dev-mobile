@@ -29,6 +29,7 @@ export function getTodo({commit}, id) {
     const AuthStr = 'Bearer '.concat(localStorage.getItem('USER_TOKEN'));
     axios.get('http://138.68.74.39/api/todos/' .concat(id), { headers: { Authorization: AuthStr } })
         .then(response => {
+            commit('setFiltre', 'all');
             commit('setCurrentTodos', response.data);
             commit('setCurrentListId', id);
         })
@@ -94,9 +95,25 @@ export function modifyTodo({commit}, [id, name, completed, todolist_id]) {
         'Content-Type': 'application/json',
         'Authorization': AuthStr,
     }
-    axios.post('http://138.68.74.39/api/todo/' . concat(id), null, { headers: headers , params: {name : name, completed : completed, todolist_id : todolist_id}})
+    axios.patch('http://138.68.74.39/api/todo/' . concat(id), null, { headers: headers , params: {name : name, completed : completed, todolist_id : todolist_id}})
         .then(response => {
             commit("modify", response.data);
+        })
+        .catch((error) => {
+            console.log('error ' + error);
+        });
+}
+
+export function deleteTodoList({commit}, todolist_id) {
+    const AuthStr = 'Bearer '.concat(localStorage.getItem('USER_TOKEN'));
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': AuthStr,
+    }
+    axios
+        .delete('http://138.68.74.39/api/todo/' + todolist_id, { headers : headers })
+        .then(response => {
+            commit("deleteList", response.data);
         })
         .catch((error) => {
             console.log('error ' + error);

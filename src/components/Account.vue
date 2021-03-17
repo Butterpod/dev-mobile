@@ -39,7 +39,7 @@
     <p> <label for="password"><b>Mot de passe : </b></label> </p>
     <input id="password" type="password" placeholder="Mot de passe" name="password" minlength="6" required v-model="password">
     <br> <br>
-    <button type="submit"> Inscription</button>
+    <button type="submit"> Inscription </button>
       <br>
 
     </form>

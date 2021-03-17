@@ -3,5 +3,6 @@ export default function () {
         todoLists: null,
         currentTodos: null,
         currentListId: null,
+        filtre: 'all',
     }
 }
