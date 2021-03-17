@@ -9,6 +9,7 @@
     <ul>
       <li v-for="todo in getFilteredCurrentTodos" :key="todo.id">
         <label id="nameTodo"> {{ todo.name }} </label>
+        <button v-on:click="deleteTodo(todo.id)"> Delete </button>
         <input type="checkbox" id="checkBox" v-model="todo.completed" true-value="1" false-value="0" @change="completeTodo([todo.id, todo.name, todo.completed, todo.todolist_id])"/>
 
       </li>
@@ -34,7 +35,7 @@ name: "TodoList",
   },
   props: ['todos'],
   methods : {
-    ...mapActions("todolist", ['completeTodo', 'createTodo', 'modifyTodo']),
+    ...mapActions("todolist", ['completeTodo', 'createTodo', 'modifyTodo', 'deleteTodo']),
     ...mapMutations("todolist", ["setFiltre"]),
   },
   computed : {

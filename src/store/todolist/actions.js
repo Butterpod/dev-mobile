@@ -111,9 +111,25 @@ export function deleteTodoList({commit}, todolist_id) {
         'Authorization': AuthStr,
     }
     axios
-        .delete('http://138.68.74.39/api/todo/' + todolist_id, { headers : headers })
+        .delete('http://138.68.74.39/api/todolist/' + todolist_id, { headers : headers })
         .then(response => {
             commit("deleteList", response.data);
+        })
+        .catch((error) => {
+            console.log('error ' + error);
+        });
+}
+
+export function deleteTodo({commit}, id) {
+    const AuthStr = 'Bearer '.concat(localStorage.getItem('USER_TOKEN'));
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': AuthStr,
+    }
+    axios
+        .delete('http://138.68.74.39/api/todo/' + id, {headers: headers})
+        .then(response => {
+            commit("deleteTodo", response.data);
         })
         .catch((error) => {
             console.log('error ' + error);

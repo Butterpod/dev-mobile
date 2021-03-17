@@ -50,6 +50,9 @@ export function setFiltre(state, filtre) {
 }
 
 export function deleteList(state, data) {
-    console.log(data);
-    console.log(state.todoLists);
+    state.todoLists.splice(data.id,1);
+}
+
+export function deleteTodo(state, data) {
+    state.currentTodos.splice(data.id, 1);
 }
