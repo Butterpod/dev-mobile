@@ -23,3 +23,15 @@ export const getFilteredCurrentTodos = (state) => {
 export const getFiltre = (state) => {
     return state.filtre;
 }
+
+export const countRemainingTodos = (state) => {
+    return state.currentTodos.filter(todo => todo.completed != 1).length;
+}
+
+export const countTodos = (state) => {
+    return state.currentTodos.length;
+}
+
+export const getCurrentListName = (state) => (id) => {
+    return state.todoLists.find(el => el.id === id).name;
+}

@@ -2,7 +2,7 @@
 
   <h1> Listes </h1>
   <sidebar-item :todoLists="getData"></sidebar-item>
-  <input type="text" v-model="listName" placeholder="Ajouter une todolist" v-on:keyup.enter="createTodoList(listName)"/>
+  <input type="text" class="addTodoList" v-model="listName" placeholder="Ajouter une todolist" v-on:keyup.enter="createTodoList(listName)"/>
   <button v-on:click="createTodoList(listName)"> Ajouter todolist </button>
 </template>
 
@@ -36,8 +36,30 @@ name: "sidebar",
 
 <style scoped>
 
-ul {
-  border : 1px solid black;
-  width : 20%;
+.addTodoList,
+.edit {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  font-size: 24px;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: 1.4em;
+  border: 0;
+  color: inherit;
+  padding: 6px;
+  border: 1px solid #999;
+  box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+.addTodoList {
+  padding: 16px 16px 16px 60px;
+  border: none;
+  background: rgba(0, 0, 0, 0.003);
+  box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
+}
+
 </style>

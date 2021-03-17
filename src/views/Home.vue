@@ -1,10 +1,12 @@
 <template>
+  <div class="blocApp">
   <div v-if="isConnected">
     <sidebar :todoLists="getTodoLists"></sidebar>
-    <todo-list v-if="getCurrentTodos !== null" :todos="getCurrentTodos"></todo-list>
+    <todo-list class="todo" v-if="getCurrentTodos !== null" :todos="getCurrentTodos"></todo-list>
   </div>
   <div v-else>
     <h2> Veuillez vous connectez. </h2>
+  </div>
   </div>
 </template>
 
@@ -44,5 +46,12 @@ export default {
 </script>
 
 <style scoped>
+
+.blocApp {
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  grid-gap: 10px;
+  grid-auto-rows: 100px;
+}
 
 </style>
