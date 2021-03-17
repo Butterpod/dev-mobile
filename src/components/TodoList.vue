@@ -8,10 +8,10 @@
     <h2> Todos </h2>
     <ul>
       <li v-for="todo in getFilteredCurrentTodos" :key="todo.id">
-        <label id="nameTodo"> {{ todo.name }} </label>
-        <button v-on:click="deleteTodo(todo.id)"> Delete </button>
+        <label v-if="!todo.editing" @dblclick="editTodo(todo)" id="nameTodo" :class="{ completed : todo.completed }"> {{ todo.name }} </label>
+        <input v-else type="text" v-model="todo.name" @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)" v-focus>
         <input type="checkbox" id="checkBox" v-model="todo.completed" true-value="1" false-value="0" @change="completeTodo([todo.id, todo.name, todo.completed, todo.todolist_id])"/>
-
+        <button v-on:click="deleteTodo(todo.id)"> Delete </button>
       </li>
     </ul>
   </div>
@@ -31,16 +31,40 @@ name: "TodoList",
   data () {
   return {
     newTodo: '',
+    editing : false,
+    beforeEditCache : '',
   }
   },
   props: ['todos'],
   methods : {
-    ...mapActions("todolist", ['completeTodo', 'createTodo', 'modifyTodo', 'deleteTodo']),
+    ...mapActions("todolist", ['completeTodo', 'createTodo', 'modifyTodo', 'deleteTodo', 'modifyTodo']),
     ...mapMutations("todolist", ["setFiltre"]),
+    editTodo(todo) {
+      this.beforeEditCache = todo.title
+      todo.editing = true
+    },
+    doneEdit(todo) {
+      if (todo.name.trim() == '') {
+        todo.name = this.beforeEditCache
+      }
+      todo.editing = false
+      this.modifyTodo([todo.id, todo.name, todo.completed, todo.todolist_id]);
+    },
+    cancelEdit(todo) {
+      todo.name = this.beforeEditCache
+      todo.editing = false
+    },
   },
   computed : {
     ...mapGetters("todolist", ['getCurrentListId', 'getFilteredCurrentTodos', 'getFiltre']),
-  }
+  },
+  directives : {
+    focus: {
+      inserted: function (el) {
+        el.focus()
+      }
+    }
+  },
 }
 </script>
 

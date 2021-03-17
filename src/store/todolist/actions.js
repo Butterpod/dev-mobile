@@ -98,6 +98,7 @@ export function modifyTodo({commit}, [id, name, completed, todolist_id]) {
     axios.patch('http://138.68.74.39/api/todo/' . concat(id), null, { headers: headers , params: {name : name, completed : completed, todolist_id : todolist_id}})
         .then(response => {
             commit("modify", response.data);
+            console.log("j'ai modif");
         })
         .catch((error) => {
             console.log('error ' + error);
