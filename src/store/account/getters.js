@@ -5,3 +5,11 @@ export const isConnected = (state) => {
 export const getWindow = (state) => {
     return state.window;
 }
+
+export const getUsername = (state) => {
+    return state.currentUser.name;
+}
+
+export const getEmail = (state) => {
+    return state.currentUser.email;
+}

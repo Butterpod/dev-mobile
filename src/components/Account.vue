@@ -13,6 +13,7 @@
   <div class="content">
   <div v-if="getWindow === 'login' && isConnected !== true">
 
+    <h1> Connexion </h1>
     <form @submit.prevent="login([email, password, username])">
     <p> <label for="userName"><b>Email : </b></label> </p>
     <input id="userName" type="text" placeholder="Email" name="userName" required v-model="email">
@@ -28,6 +29,7 @@
 
   <div v-if="getWindow === 'register' && isConnected !== true">
 
+    <h1> Inscription </h1>
     <form @submit.prevent="register([email, password, username])">
 
       <p><label for="userName"><b>Nom d'utilisateur : </b></label></p>
@@ -46,7 +48,9 @@
   </div>
 
   <div v-if="isConnected === true">
+    <h1> Déconnexion </h1>
 
+    <p> Vous êtes actuellement connecté sur l'utilisateur : {{ getUsername }} avec l'email : {{ getEmail }}. </p>
     <form @submit.prevent="logout">
       <button> Deconnexion </button>
     </form>
@@ -72,8 +76,8 @@ export default {
     ...mapActions("account", ["login", "register"]),
   },
   computed : {
-    ...mapGetters("account", ["getWindow", "isConnected"]),
-  }
+    ...mapGetters("account", ["getWindow", "isConnected", "getUsername", "getEmail"]),
+  },
 }
 </script>
 
@@ -95,7 +99,6 @@ nav li:hover {
 }
 
 a {
-  pointer-events: none;
   text-decoration: none;
   color : #FFFFFF;
 }
@@ -116,6 +119,10 @@ nav ul {
   background : #0582CA;
   color : #051923;
   text-align : center;
+  border-radius : 25%;
+  width : 60%;
+  margin : auto;
+  padding : 10px;
 }
 
 button {

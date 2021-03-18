@@ -15,17 +15,6 @@ export function load({commit}) {
         });
 }
 
-export function getUser() {
-    const AuthStr = 'Bearer '.concat(localStorage.getItem('USER_TOKEN'));
-    axios.get('http://138.68.74.39/api/user', { headers: { Authorization: AuthStr } })
-        .then(response => {
-            localStorage.setItem('user', response.data);
-        })
-        .catch((error) => {
-            console.log('error ' + error);
-        });
-}
-
 export function getTodo({commit}, id) {
     const AuthStr = 'Bearer '.concat(localStorage.getItem('USER_TOKEN'));
     axios.get('http://138.68.74.39/api/todos/' .concat(id), { headers: { Authorization: AuthStr } })

@@ -9,10 +9,17 @@ export function error (state, error) {
 
 export function logout(state) {
     state.token = '';
-    localStorage.removeItem('USER_TOKEN');
+    state.window = "login";
+    state.currentUser = '';
+    state.errors = [];
+
     localStorage.clear();
 }
 
 export function setWindow(state, windowName) {
     state.window = windowName;
+}
+
+export function setUser(state, data) {
+    state.currentUser = data;
 }
