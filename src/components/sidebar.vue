@@ -36,8 +36,7 @@ name: "sidebar",
 
 <style scoped>
 
-.addTodoList,
-.edit {
+.addTodoList{
   position: relative;
   margin: 0;
   width: 100%;
@@ -60,6 +59,18 @@ name: "sidebar",
   border: none;
   background: rgba(0, 0, 0, 0.003);
   box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
+}
+
+button{
+  margin: 0.3em;
+  color : #FFFFFF;
+  background : #003554;
+  border : 1px solid #051923;
+  border-radius: 15px;
+}
+
+button:hover{
+  background : #096093;
 }
 
 </style>

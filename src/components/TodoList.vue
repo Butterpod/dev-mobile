@@ -16,7 +16,7 @@
             <label v-if="!todo.editing" @dblclick="editTodo(todo)" id="nameTodo"> {{ todo.name }} </label>
             <input class="edit" v-else type="text" v-model="todo.name" @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)" v-focus>
             <input type="checkbox" class="checkBox" v-model="todo.completed" true-value="1" false-value="0" @change="completeTodo([todo.id, todo.name, todo.completed, todo.todolist_id])"/>
-            <button class="delete" v-on:click="deleteTodo(todo.id)"> Delete </button>
+            <button class="delete" v-on:click="deleteTodo(todo.id)"> X </button>
           </div>
         </li>
       </ul>
@@ -78,4 +78,7 @@ name: "TodoList",
 }
 </script>
 
-<style src="./style.css"></style>
+<style src="./style.css">
+
+
+</style>

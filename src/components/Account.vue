@@ -83,14 +83,21 @@ nav li {
   list-style-type: none;
   grid-template-columns: 1fr 1fr;
   padding: 20px;
-  border: 1px solid black;
+  border: 1px solid #051923;
   border-radius: 10px;
-  background: black;
-  color : white;
+  background: #003554;
+  margin: 15px;
+}
+
+nav li:hover {
+  background: #627681;
+  color : #00A6FB;
 }
 
 a {
-  color : inherit;
+  pointer-events: none;
+  text-decoration: none;
+  color : #FFFFFF;
 }
 
 nav ul {
@@ -101,28 +108,25 @@ nav ul {
 
 /* items menus */
 
-nav li {
-  margin: 15px;
-}
 
-
-/* survols items menus */
-
-nav li:hover {
-  font-weight: bold;
-}
 
 .content {
-  border : 1px solid black;
-  background : black;
-  color : white;
+  border : 1px solid #051923;
+  border-radius: 15px;
+  background : #0582CA;
+  color : #051923;
   text-align : center;
 }
 
 button {
   font-family: inherit;
   font-size: 100%;
-  color : white;
-  background : darkblue;
+  color : #FFFFFF;
+  background : #003554;
+  border-radius: 10px;
+}
+
+button:hover {
+  background : #096093;
 }
 </style>

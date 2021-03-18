@@ -49,9 +49,11 @@ export default {
 
 .blocApp {
   display: grid;
-  grid-template-columns: 2fr 2fr;
+  grid-template-columns: 2fr;
+  grid-template-rows: 2fr;
   grid-gap: 10px;
   grid-auto-rows: 100px;
+  margin: 1em;
 }
 
 </style>
