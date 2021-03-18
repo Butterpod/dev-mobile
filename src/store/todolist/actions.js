@@ -114,7 +114,7 @@ export function deleteTodoList({commit}, todolist_id) {
     axios
         .delete('http://138.68.74.39/api/todolist/' + todolist_id, { headers : headers })
         .then(response => {
-            commit("deleteList", response.data);
+            commit("deleteList", [todolist_id, response.data]);
         })
         .catch((error) => {
             console.log('error ' + error);
@@ -130,7 +130,7 @@ export function deleteTodo({commit}, id) {
     axios
         .delete('http://138.68.74.39/api/todo/' + id, {headers: headers})
         .then(response => {
-            commit("deleteTodo", response.data);
+            commit("deleteTodo", [id, response.data]);
         })
         .catch((error) => {
             console.log('error ' + error);

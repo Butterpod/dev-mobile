@@ -11,7 +11,7 @@
     <div class="main">
 
         <ul class="todo-list">
-        <li v-for="todo in getFilteredCurrentTodos" :key="todo.id" :class="{completed: todo.completed, editing: todo == editing}" >
+        <li v-for="todo in getFilteredCurrentTodos" :key="todo.id" :class="{completed: todo.completed == 1, editing: todo == editing}" >
           <div class="view">
             <label v-if="!todo.editing" @dblclick="editTodo(todo)" id="nameTodo"> {{ todo.name }} </label>
             <input class="edit" v-else type="text" v-model="todo.name" @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)" v-focus>
@@ -24,7 +24,7 @@
     </div>
 
     <div class="filtres">
-        <p> <strong> Todos restant : {{ countRemainingTodos }} sur {{ countTodos }}</strong> </p>
+        <p> <strong> Todos restantes : {{ countRemainingTodos }} sur {{ countTodos }}</strong> </p>
         <button v-bind:class="{selected: getFiltre === 'all'}" v-on:click.prevent="setFiltre('all')"> Tout</button>
         <button v-bind:class="{selected: getFiltre === 'todo'}" v-on:click.prevent="setFiltre('todo')"> Todo </button>
         <button v-bind:class="{selected: getFiltre === 'finished'}" v-on:click.prevent="setFiltre('finished')"> Terminé </button>

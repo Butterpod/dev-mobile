@@ -49,10 +49,15 @@ export function setFiltre(state, filtre) {
     state.filtre = filtre;
 }
 
-export function deleteList(state, data) {
-    state.todoLists.splice(data.id,1);
+export function deleteList(state, [todolist_id, data]) {
+    console.log(data);
+    let todoListIndex = state.todoLists.indexOf(state.todoLists.find(el => el.id === todolist_id));
+    state.todoLists.splice(todoListIndex, 1);
 }
 
-export function deleteTodo(state, data) {
-    state.currentTodos.splice(data.id, 1);
+export function deleteTodo(state, [id, data]) {
+    console.log(data);
+    let todoIndex = state.currentTodos.indexOf(state.currentTodos.find(el => el.id === id));
+    console.log(todoIndex)
+    state.currentTodos.splice(todoIndex, 1);
 }
