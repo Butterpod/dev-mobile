@@ -3,8 +3,8 @@
   <div class="sidebar">
     <h1> Listes </h1>
     <sidebar-item :todoLists="getData"></sidebar-item>
-    <input type="text" class="addTodoList" v-model="listName" placeholder="Ajouter une todolist" v-on:keyup.enter="createTodoList(listName)"/>
-    <button v-on:click="createTodoList(listName)"> Ajouter todolist </button>
+    <input type="text" class="addTodoList" v-model="listName" placeholder="Ajouter une todolist" v-on:keyup.enter="createTodoList(listName), listName = ''"/>
+    <button v-on:click="createTodoList(listName), listName = ''"> Ajouter todolist </button>
   </div>
 </template>
 
