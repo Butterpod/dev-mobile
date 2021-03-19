@@ -2,8 +2,8 @@
 
   <nav v-if="!isConnected">
     <ul class="navlist">
-      <li> <a href="#" v-on:click="setWindow('login')"> Connexion </a> </li>
-      <li> <a href="#" v-on:click="setWindow('register')"> Inscription </a> </li>
+      <li v-on:click="setWindow('login')"> <a href="#"> Connexion </a> </li>
+      <li v-on:click="setWindow('register')"> <a href="#"> Inscription </a> </li>
     </ul>
 
   </nav>
@@ -83,6 +83,11 @@ export default {
 
 <style scoped>
 
+nav ul {
+  display: flex;
+  justify-content: center;
+}
+
 nav li {
   list-style-type: none;
   grid-template-columns: 1fr 1fr;
@@ -96,6 +101,8 @@ nav li {
 nav li:hover {
   background: #627681;
   color : #00A6FB;
+  width: 90px;
+  text-align : center;
 }
 
 a {
@@ -103,24 +110,14 @@ a {
   color : #FFFFFF;
 }
 
-nav ul {
-  display: flex;
-  justify-content: center;
-}
-
-
-/* items menus */
-
-
-
 .content {
   border : 1px solid #051923;
   border-radius: 15px;
-  background : #0582CA;
-  color : #051923;
+  background : white;
+  color : black;
   text-align : center;
   border-radius : 25%;
-  width : 60%;
+  width : 30%;
   margin : auto;
   padding : 10px;
 }

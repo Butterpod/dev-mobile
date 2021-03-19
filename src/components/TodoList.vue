@@ -4,7 +4,7 @@
     <h2> Todos de la liste : {{ getCurrentListName(getCurrentListId)}} </h2>
 
     <div class="add">
-      <input type="text" class="addTodo" placeholder="Ajouter une todo" v-model="newTodo" v-on:keyup.enter="createTodo([newTodo, 0, getCurrentListId])">
+      <input type="text" class="addTodo" placeholder="Ajouter une todo" v-model="newTodo" v-on:keyup.enter="createTodo([newTodo, 0, getCurrentListId]), newTodo = ''">
       <button v-on:click="createTodo([newTodo, 0, getCurrentListId])"> Ajouter </button>
     </div>
 

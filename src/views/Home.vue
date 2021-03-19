@@ -1,7 +1,7 @@
 <template>
   <div class="blocApp">
   <div v-if="isConnected">
-    <sidebar :todoLists="getTodoLists"></sidebar>
+    <sidebar class="sideb" :todoLists="getTodoLists"></sidebar>
     <todo-list class="todo" v-if="getCurrentTodos !== null" :todos="getCurrentTodos"></todo-list>
   </div>
   <div v-else>
@@ -32,28 +32,38 @@ export default {
     ...mapGetters("todolist", ['getTodoLists', 'getCurrentTodos']),
     ...mapGetters("account", ['isConnected']),
   },
-  /*
-  computed : {
-    getData() {
-      let retrievedObject = localStorage.getItem('todoLists');
-      console.log(retrievedObject);
-      console.log(JSON.parse(retrievedObject));
-      return JSON.parse(retrievedObject);
-    }
-  }
-   */
 }
 </script>
 
 <style scoped>
 
 .blocApp {
-  display: grid;
-  grid-template-columns: 2fr;
-  grid-template-rows: 2fr;
-  grid-gap: 10px;
-  grid-auto-rows: 100px;
-  margin: 1em;
+  text-align : center;
+  margin: 0 auto;
+}
+.sideb {
+  color : black;
+  background : white;
+  float: left;
+  width: 300px;
+}
+
+.todo {
+  margin-left : 400px;
+  background: #ffffff;
+}
+
+@media screen and (max-width: 640px) {
+  .blocApp {
+    text-align : center;
+  }
+  .sideb {
+    overflow: auto;
+  }
+  .todo {
+    overflow : auto;
+    margin-left : 100px;
+  }
 }
 
 </style>

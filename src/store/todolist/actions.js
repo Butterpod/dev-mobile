@@ -7,8 +7,7 @@ export function load({commit}) {
         .then(response => {
             localStorage.setItem("data", JSON.stringify(response.data))
             console.log('loading ...');
-            console.log(response.data);
-            commit('load', response.data);
+            commit('load', JSON.parse(localStorage.getItem("data")));
         })
         .catch((error) => {
             console.log('error ' + error);
@@ -22,8 +21,8 @@ export function getTodo({commit}, id) {
             localStorage.setItem('current_todo', JSON.stringify(response.data));
             localStorage.setItem('currentListId', id);
             commit('setFiltre', 'all');
-            commit('setCurrentTodos', response.data);
-            commit('setCurrentListId', id);
+            commit('setCurrentTodos', JSON.parse(localStorage.getItem('current_todo')));
+            commit('setCurrentListId', parseInt(localStorage.getItem('currentListId')));
         })
         .catch((error) => {
             console.log('error ' + error);
@@ -42,7 +41,7 @@ export function createTodoList({commit}, name) {
         .then(response => {
             localStorage.setItem("data",JSON.stringify(JSON.parse(localStorage.getItem("data")).concat(response.data)));
             console.log("Todolist ajouté");
-            commit('addTodoList', response.data);
+            commit('load', JSON.parse(localStorage.getItem("data")));
         })
         .catch((error) => {
             console.log('error ' + error);
@@ -61,7 +60,7 @@ export function createTodo({commit}, [name, completed, todolist_id]) {
         .then(response => {
             localStorage.setItem("current_todo",JSON.stringify(JSON.parse(localStorage.getItem("current_todo")).concat(response.data)))
             console.log("ca marche");
-            commit('addTodo', response.data);
+            commit('setCurrentTodos', JSON.parse(localStorage.getItem("current_todo")));
         })
         .catch((error) => {
             console.log('error ' + error);
@@ -79,7 +78,7 @@ export function completeTodo({commit}, [id, name, completed, todolist_id]) {
             let current = JSON.parse(localStorage.getItem("current_todo"));
             current.find(el => el.id === response.data.id).completed=parseInt(completed);
             localStorage.setItem("current_todo",JSON.stringify(current));
-            commit('complete', response.data);
+            commit('setCurrentTodos', JSON.parse(localStorage.getItem("current_todo")));
         })
         .catch((error) => {
             console.log('error ' + error);
@@ -97,7 +96,7 @@ export function modifyTodo({commit}, [id, name, completed, todolist_id]) {
             let current = JSON.parse(localStorage.getItem("current_todo"));
             current.find(el => el.id === response.data.id).name=name;
             localStorage.setItem("current_todo",JSON.stringify(current));
-            commit("modify", response.data);
+            commit("setCurrentTodos", JSON.parse(localStorage.getItem("current_todo")));
             console.log("j'ai modif");
         })
         .catch((error) => {
@@ -113,12 +112,15 @@ export function deleteTodoList({commit}, todolist_id) {
     }
     axios
         .delete('http://138.68.74.39/api/todolist/' + todolist_id, { headers : headers })
-        .then(response => {
+        .then(() => {
             let todelete = JSON.parse(localStorage.getItem("data"));
             let index = todelete.indexOf(todelete.find(el => el.id === todolist_id));
             todelete.splice(index,1);
             localStorage.setItem("data",JSON.stringify(todelete));
-            commit("deleteList", [todolist_id, response.data]);
+            commit("load", JSON.parse(localStorage.getItem("data")));
+            // on reset la currentTodo
+            localStorage.removeItem("current_todo");
+            commit("setCurrentTodos", null);
         })
         .catch((error) => {
             console.log('error ' + error);
@@ -133,12 +135,12 @@ export function deleteTodo({commit}, id) {
     }
     axios
         .delete('http://138.68.74.39/api/todo/' + id, {headers: headers})
-        .then(response => {
+        .then(() => {
             let todelete = JSON.parse(localStorage.getItem("current_todo"));
             let index = todelete.indexOf(todelete.find(el => el.id === id));
             todelete.splice(index,1);
             localStorage.setItem("current_todo",JSON.stringify(todelete));
-            commit("deleteTodo", [id, response.data]);
+            commit("setCurrentTodos", JSON.parse(localStorage.getItem("current_todo")));
         })
         .catch((error) => {
             console.log('error ' + error);

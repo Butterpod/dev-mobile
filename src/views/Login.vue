@@ -18,4 +18,9 @@ export default {
 
 <style scoped>
 
+h1 {
+  text-align : center;
+  color : white;
+}
+
 </style>

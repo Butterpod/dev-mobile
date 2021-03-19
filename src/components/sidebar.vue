@@ -1,9 +1,11 @@
 <template>
 
-  <h1> Listes </h1>
-  <sidebar-item :todoLists="getData"></sidebar-item>
-  <input type="text" class="addTodoList" v-model="listName" placeholder="Ajouter une todolist" v-on:keyup.enter="createTodoList(listName)"/>
-  <button v-on:click="createTodoList(listName)"> Ajouter todolist </button>
+  <div class="sidebar">
+    <h1> Listes </h1>
+    <sidebar-item :todoLists="getData"></sidebar-item>
+    <input type="text" class="addTodoList" v-model="listName" placeholder="Ajouter une todolist" v-on:keyup.enter="createTodoList(listName)"/>
+    <button v-on:click="createTodoList(listName)"> Ajouter todolist </button>
+  </div>
 </template>
 
 <script>
@@ -35,6 +37,12 @@ name: "sidebar",
 </script>
 
 <style scoped>
+
+.sidebar {
+  width: 40%;
+  text-align : center;
+  border : 1px inset black;
+}
 
 .addTodoList{
   position: relative;

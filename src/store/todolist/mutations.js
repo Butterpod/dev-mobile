@@ -8,7 +8,6 @@ export function addTodoList(state, data) {
 
 export function setCurrentTodos(state, todo) {
     state.currentTodos = todo;
-    console.log(state.currentTodos);
 }
 
 export function setCurrentListId(state, id) {
@@ -16,13 +15,10 @@ export function setCurrentListId(state, id) {
 }
 
 export function complete(state, data) {
-    console.log(state.currentTodos.find(el => el.id === data.id).completed);
-    console.log(data.completed);
     state.currentTodos.find(el => el.id === data.id).completed = data.completed;
 }
 
 export function addTodo(state, data) {
-    console.log(data);
     state.currentTodos.push({
         id : data.id,
         todolist_id : data.todolist_id,

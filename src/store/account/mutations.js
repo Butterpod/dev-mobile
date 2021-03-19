@@ -1,6 +1,5 @@
 export function login (state, token) {
     state.token = token;
-    console.log(state.token);
 }
 
 export function error (state, error) {
